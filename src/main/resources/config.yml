@@ -1,0 +1,35 @@
+#  ___ _       _     _    ___ _____
+# / __| |_ _ _(_)_ _| |  / __|_   _|__ _ __
+# \__ \  _| '_| \ \ / |__\__ \ | |/ _ \ '_ \ 1.0
+# |___/\__|_| |_/_\_\____|___/ |_|\___/ .__/ By: Strix Cloud
+#                                     |_|
+
+# Configurações da Lojasquare
+Lojasquare:
+  # Esse plugin NÃO coleta NENHUMA informação sua!
+  # Preencha esse valor com a sua secret-key encontrada em: https://painel.lojasquare.com.br/conta/criarkey
+  secret-key: 'SUA_SECRET_KEY'
+
+# Configuração dos debugs dos plugins strix
+Debug:
+  # Enviar debugs para o console
+  console-log: true
+  # Salvar debugs em arquivo .txt
+  file-log: false
+
+# Configurações de display das informações
+Display:
+  # Tag para todos os 5 top doadores (LegendChat)
+  lc-tag: '&8[&5&lTOP-DONATOR&8]&f'
+  # Configurações do holograma
+  hologram:
+    # Parte de cima
+    header:
+      - ''
+    # Parte do meio do holograma
+    content:
+      valid: '&d@player &8- &5R$@value &fDoados'
+      invalid: '&cX&8-----&c Ninguém &8-----&cX'
+    # Parte de baixo
+    footer:
+      - ''

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="StrixLSTop:jar">
+    <output-path>$PROJECT_DIR$/../../../Teste de pl/plugins</output-path>
+    <root id="archive" name="StrixLSTop.jar">
+      <element id="module-output" name="StrixLSTop" />
+    </root>
+  </artifact>
+</component>
