@@ -4,8 +4,8 @@
 - Applied SOLID principles.
 - Documented API for developers **(StrixLSTopAPI.java)**
 - Soft dependencies:
-    - HolographicDisplays
-    - LegendChat (or nChat)
+    - HolographicDisplays - For top holograms
+    - LegendChat (or nChat) - For chat tag *(top_donator)*
 #### Commands:
 - strixlstop:
     **Main Command** *(Alises: lstop;lojasquaretop)*
