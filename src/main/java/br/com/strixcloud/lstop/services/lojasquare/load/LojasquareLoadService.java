@@ -1,8 +1,8 @@
 package br.com.strixcloud.lstop.services.lojasquare.load;
 
 import br.com.strixcloud.lstop.data.AccountsDAO;
-import br.com.strixcloud.lstop.provider.lojasquare.ILSProvider;
 import br.com.strixcloud.lstop.provider.log.IStrixLogger;
+import br.com.strixcloud.lstop.provider.lojasquare.ILSProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.var;
 

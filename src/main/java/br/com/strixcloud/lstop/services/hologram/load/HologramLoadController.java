@@ -3,7 +3,6 @@ package br.com.strixcloud.lstop.services.hologram.load;
 import br.com.strixcloud.lstop.StrixLSTop;
 import lombok.Getter;
 import lombok.var;
-import org.bukkit.Location;
 
 public class HologramLoadController {
 

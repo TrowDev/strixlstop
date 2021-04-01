@@ -5,10 +5,10 @@ import br.com.strixcloud.lstop.entities.Messages;
 import br.com.strixcloud.lstop.entities.data.TopAccount;
 import br.com.strixcloud.lstop.entities.util.order.Orderable;
 import br.com.strixcloud.lstop.entities.util.order.impl.OrderByASC;
+import lombok.var;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import lombok.var;
 
 import java.util.ArrayList;
 

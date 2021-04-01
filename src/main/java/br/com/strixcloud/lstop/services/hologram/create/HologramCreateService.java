@@ -4,7 +4,6 @@ import br.com.strixcloud.lstop.provider.config.IStorageProvider;
 import br.com.strixcloud.lstop.provider.hologram.IHologramProvider;
 import br.com.strixcloud.lstop.services.hologram.setup.HologramSetupController;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.var;
 import org.bukkit.Location;
 

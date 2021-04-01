@@ -2,7 +2,6 @@ package br.com.strixcloud.lstop.provider.lojasquare.impl;
 
 import br.com.strixcloud.lstop.entities.data.TopAccount;
 import br.com.strixcloud.lstop.provider.lojasquare.ILSProvider;
-import br.com.strixcloud.lstop.provider.log.IStrixLogger;
 import br.com.strixcloud.lstop.provider.request.IRequestProvider;
 import com.google.gson.JsonElement;
 import lombok.RequiredArgsConstructor;

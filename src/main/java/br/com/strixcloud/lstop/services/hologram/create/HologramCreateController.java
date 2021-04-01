@@ -1,7 +1,6 @@
 package br.com.strixcloud.lstop.services.hologram.create;
 
 import br.com.strixcloud.lstop.StrixLSTop;
-import br.com.strixcloud.lstop.entities.data.IPlacedHologram;
 import lombok.Getter;
 import lombok.var;
 import org.bukkit.Location;
