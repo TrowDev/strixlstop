@@ -4,6 +4,7 @@ import br.com.strixcloud.lstop.entities.data.TopAccount;
 import br.com.strixcloud.lstop.entities.util.DAO;
 import lombok.Getter;
 
+
 public class AccountsDAO extends DAO<String, TopAccount> {
 
     @Getter

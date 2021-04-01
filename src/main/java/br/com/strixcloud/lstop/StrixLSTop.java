@@ -1,5 +1,6 @@
 package br.com.strixcloud.lstop;
 
+import br.com.strixcloud.lstop.bukkit.command.TopDonatorsCommand;
 import br.com.strixcloud.lstop.bukkit.listener.LegendChatListener;
 import br.com.strixcloud.lstop.data.AccountsDAO;
 import br.com.strixcloud.lstop.entities.data.TopAccount;
