@@ -17,6 +17,14 @@ Debug:
   # Salvar debugs em arquivo .txt
   file-log: false
 
+# Configurações de update das informações
+Tasks:
+  # Tempo em minutos para atualização dos top doares da lojasquare (Async)
+  lojasquare-update: 10
+  # Tempo em minutos para atualização dos hologramas (Sync)
+  # Valores baixos VÃO ALTERAR A PERFORMANCE do plugin, não nos responsabilizamos por isso.
+  holograms-update: 15
+
 # Configurações de display das informações
 Display:
   # Tag para todos os 5 top doadores (LegendChat)
@@ -25,6 +33,7 @@ Display:
   hologram:
     # Parte de cima
     header:
+      - '&5&lTop Doadores deste mês'
       - ''
     # Parte do meio do holograma
     content:
@@ -33,3 +42,5 @@ Display:
     # Parte de baixo
     footer:
       - ''
+      - '&fAgradecemos a confiança em nosso servidor'
+      - '&fE ainda mais por &d&ljogar conosco&f!'

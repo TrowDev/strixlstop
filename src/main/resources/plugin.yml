@@ -6,3 +6,13 @@ softdepend:
   - Legendchat
   - nChat
   - HolographicDisplays
+commands:
+  topdonators:
+    aliases:
+      - topdoadores
+    description: Sends the top donators of Lojasquare
+  strixlstop:
+    aliases:
+      - lstop
+      - lojasquaretop
+    description: Main command of plugin
