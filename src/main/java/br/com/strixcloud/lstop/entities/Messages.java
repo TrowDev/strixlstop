@@ -13,7 +13,7 @@ public enum Messages {
     TOP_DONATOR_FOOTER("Messages.donator.footer", Arrays.asList(" ", "&8&m-------------------------")),
     TOP_DONATOR_VALUE("Messages.donator.value", "&5@player &f- &d@value"),
     HOLOGRAM_CREATED("Messages.hologram-create", "&8[&5&lStrixLSTop&8] &fHolograma &acriado &fcom sucesso!"),
-    HOLOGRAM_DELETED("Messages.hologram-delete", "&8[&5&lStrixLSTop&8] &fHolograma &cdeletado &fcom sucesso!"),
+    HOLOGRAM_DELETED("Messages.hologram-delete", "&8[&5&lStrixLSTop&8] &fHologramas &cdeletados &fcom sucesso!"),
     ERROR_NO_PERMISSION("Messages.error-no-perm", "&8[&5&lStrixLSTop&8] &cSem permissao!"),
     ERROR_NOT_PLAYER("Messages.error-not-player", "&8[&5&lStrixLSTop&8] &cSomente jogadores podem utilizar esse comando"),
     ERROR_NOT_HOLOGRAM("Messages.error-not-hologram", "&8[&5&lStrixLSTop&8] &cHolographicDisplays não hookado"),

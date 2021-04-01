@@ -14,4 +14,6 @@ public class HologramData {
     private String contentValid;
     private String contentInvalid;
 
+    private int size;
+
 }

@@ -7,12 +7,11 @@ import br.com.strixcloud.lstop.entities.util.order.Orderable;
 import br.com.strixcloud.lstop.entities.util.order.impl.OrderByASC;
 import br.com.strixcloud.lstop.provider.config.IDisplayProvider;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.var;
 
 import java.util.ArrayList;
 
-@Data @AllArgsConstructor
+@AllArgsConstructor
 public class HologramSetupService {
 
     private final IDisplayProvider displayProvider;
@@ -25,11 +24,18 @@ public class HologramSetupService {
         var toOrder = new ArrayList<Orderable>(AccountsDAO.getInstance().get());
         var accounts = OrderByASC.getInstance().order(toOrder);
 
-        for (var obj : accounts) {
-            var acc = (TopAccount) obj;
-            var line = holoData.getContentValid()
-                    .replace("@value", String.valueOf(obj.getValue()))
-                    .replace("@player", acc.getPlayer());
+        var holoSize = displayProvider.getHologramData().getSize();
+        for (int i = 0;i < holoSize; i++) {
+            var line = displayProvider.getHologramData().getContentInvalid();
+            if (i < accounts.size()) {
+                var acc = (TopAccount) accounts.get(i);
+                if (acc != null) {
+                    line = holoData.getContentValid()
+                            .replace("@value", String.valueOf(acc.getValue()))
+                            .replace("@player", acc.getPlayer());
+                }
+            }
+
             hologram.append(line);
         }
 

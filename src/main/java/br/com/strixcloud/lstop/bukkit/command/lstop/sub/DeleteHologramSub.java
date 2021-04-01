@@ -1,8 +1,11 @@
 package br.com.strixcloud.lstop.bukkit.command.lstop.sub;
 
+import br.com.strixcloud.lstop.StrixLSTop;
 import br.com.strixcloud.lstop.entities.Messages;
 import br.com.strixcloud.lstop.entities.util.SubCommand;
 import br.com.strixcloud.lstop.services.hologram.create.HologramCreateController;
+import br.com.strixcloud.lstop.services.hologram.delete.HologramDeleteController;
+import lombok.var;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -14,7 +17,13 @@ public class DeleteHologramSub extends SubCommand {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        HologramCreateController.getInstance().handle(((Player) sender).getLocation());
+        var hasHologram = StrixLSTop.getInstance().getHologramProvider() != null;
+        if (!hasHologram) {
+            sender.sendMessage(Messages.ERROR_NOT_HOLOGRAM.getMessage());
+            return;
+        }
+
+        HologramDeleteController.getInstance().handle();
 
         sender.sendMessage(Messages.HOLOGRAM_DELETED.getMessage());
     }

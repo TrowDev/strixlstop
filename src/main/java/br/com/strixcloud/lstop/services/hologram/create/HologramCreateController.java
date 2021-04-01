@@ -15,7 +15,8 @@ public class HologramCreateController {
 
     public HologramCreateController() {
         var hologramProvider = StrixLSTop.getInstance().getHologramProvider();
-        this.service = new HologramCreateService(hologramProvider);
+        var storageProvider = StrixLSTop.getInstance().getStorageProvider();
+        this.service = new HologramCreateService(hologramProvider, storageProvider);
     }
 
     public void handle(Location loc) {

@@ -26,22 +26,21 @@ public class LsTopCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if (args.length > 0) {
+            if(!(sender instanceof Player)) {
+                sender.sendMessage(Messages.ERROR_NOT_PLAYER.getMessage());
+                return false;
+            }
             String currentArg = args[0];
             for (SubCommand subCmd : subCommands) {
                 if (currentArg.equalsIgnoreCase(subCmd.getName()) || subCmd.getAlias().contains(currentArg)) {
-                    if(sender instanceof Player) {
-                        if (sender.hasPermission(subCmd.getPermission()) || subCmd.getPermission().isEmpty()) {
-                            subCmd.execute(sender, args);
-                            return true;
-                        }
-                        sender.sendMessage(Messages.ERROR_NO_PERMISSION.getMessage());
-                        return false;
+                    if (sender.hasPermission(subCmd.getPermission()) || subCmd.getPermission().isEmpty()) {
+                        subCmd.execute(sender, args);
+                        return true;
                     }
-                    sender.sendMessage(Messages.ERROR_NOT_PLAYER.getMessage());
+                    sender.sendMessage(Messages.ERROR_NO_PERMISSION.getMessage());
                     return false;
                 }
             }
-            return false;
         }
         sender.sendMessage(Messages.HELP_MESSAGE.getMessage());
         return false;

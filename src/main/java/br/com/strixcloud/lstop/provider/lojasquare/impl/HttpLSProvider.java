@@ -17,11 +17,9 @@ import java.util.Map;
 public class HttpLSProvider implements ILSProvider {
 
     private final IRequestProvider provider;
-    private final IStrixLogger logger;
 
-    public HttpLSProvider(IRequestProvider provider, IStrixLogger logger, String authKey) {
+    public HttpLSProvider(IRequestProvider provider, String authKey) {
         this.provider = provider;
-        this.logger = logger;
         provider.auth(authKey);
     }
 
@@ -31,6 +29,11 @@ public class HttpLSProvider implements ILSProvider {
         var res = provider
                 .get("https://api.lojasquare.com.br//v1/transacoes/topCompradores");
 
+        // Gambiarra anti erro kkkk, de certa forma funciona bem.
+        // Gambiarra a gente aceita, oque não aceitamos é a derrota.
+
+        if (res.getOBJECT().toString().equalsIgnoreCase("[]")) return topAccounts;
+
         for (Map.Entry<String, JsonElement> entry : res.getOBJECT().entrySet()) {
             var p = entry.getKey();
             var value = entry.getValue().getAsDouble();
@@ -38,6 +41,6 @@ public class HttpLSProvider implements ILSProvider {
             var acc = new TopAccount(p, value);
             topAccounts.add(acc);
         }
-    return topAccounts;
+        return topAccounts;
     }
 }

@@ -1,11 +1,14 @@
 package br.com.strixcloud.lstop;
 
 import br.com.strixcloud.lstop.bukkit.command.TopDonatorsCommand;
+import br.com.strixcloud.lstop.bukkit.command.lstop.LsTopCommand;
 import br.com.strixcloud.lstop.bukkit.listener.LegendChatListener;
 import br.com.strixcloud.lstop.data.AccountsDAO;
 import br.com.strixcloud.lstop.entities.data.TopAccount;
 import br.com.strixcloud.lstop.entities.util.ConfigFile;
 import br.com.strixcloud.lstop.entities.util.DateDuration;
+import br.com.strixcloud.lstop.provider.config.IStorageProvider;
+import br.com.strixcloud.lstop.provider.config.impl.YamlStorageProvider;
 import br.com.strixcloud.lstop.provider.hologram.IHologramProvider;
 import br.com.strixcloud.lstop.provider.hologram.impl.HDHologramProvider;
 import br.com.strixcloud.lstop.provider.lojasquare.ILSProvider;
@@ -17,12 +20,15 @@ import br.com.strixcloud.lstop.provider.log.impl.StrixLogger;
 import br.com.strixcloud.lstop.provider.request.IRequestProvider;
 import br.com.strixcloud.lstop.provider.request.impl.HttpRequestProvider;
 import br.com.strixcloud.lstop.services.hologram.create.HologramCreateController;
+import br.com.strixcloud.lstop.services.hologram.load.HologramLoadController;
 import br.com.strixcloud.lstop.services.lojasquare.load.LojasquareLoadController;
+import br.com.strixcloud.lstop.task.HologramsUpdateTask;
 import br.com.strixcloud.lstop.task.LojasquareUpdateTask;
 import lombok.Getter;
 import lombok.var;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.Timer;
 
@@ -32,17 +38,18 @@ public class StrixLSTop extends JavaPlugin {
     @Getter private ILSProvider lsProvider;
     @Getter private IDisplayProvider displayProvider;
     @Getter private IHologramProvider hologramProvider;
+    @Getter private IStorageProvider storageProvider;
 
     @Getter private ConfigFile configFile;
+    @Getter private ConfigFile storageFile;
     @Getter private IStrixLogger sLogger;
 
     private Timer timer;
+    private BukkitTask bukkitTask;
 
     public void onEnable() {
         var duration = new DateDuration();
         if (!load()) return;
-
-        AccountsDAO.getInstance().add(new TopAccount("SrBugad0", 5));
 
         long ms = duration.calculate();
         sLogger.info(String.format("§dLoaded plugin in §f%sms", ms));
@@ -82,8 +89,10 @@ public class StrixLSTop extends JavaPlugin {
     }
 
     private void unload() {
-        if (hasPluginLoaded("HolographicDisplays"))
+        if (hasPluginLoaded("HolographicDisplays") && hologramProvider != null)
             hologramProvider.getHolograms().forEach(hologramProvider::delete);
+        if (timer != null) timer.cancel();
+        if (bukkitTask != null) bukkitTask.cancel();
     }
 
     /*
@@ -92,28 +101,22 @@ public class StrixLSTop extends JavaPlugin {
 
     private void setupConfiguration() {
         configFile = new ConfigFile(this, "config.yml");
+        storageFile = new ConfigFile(this, "storage.yml");
     }
 
     private void setupLS() {
         requestProvider = new HttpRequestProvider();
         sLogger = new StrixLogger(this, configFile);
         var authToken = configFile.getConfig().getString("Lojasquare.secret-key");
-        lsProvider = new HttpLSProvider(requestProvider, sLogger, authToken);
+        lsProvider = new HttpLSProvider(requestProvider, authToken);
     }
 
     private void setupDisplay() {
         displayProvider = new YamlDisplayProvider(configFile);
         displayProvider.load();
 
-        if (hasPluginLoaded("HolographicDisplays")) {
-            hologramProvider = new HDHologramProvider();
-            sLogger.info("HolographicDisplays hook initialized, displays holograms enabled");
-        } else {
-            sLogger.warn("LegendChat not loaded, disabling holograms module");
-        }
-    }
+        storageProvider = new YamlStorageProvider(storageFile);
 
-    private void loadBukkit() {
         if (hasPluginLoaded("Legendchat")) {
             Bukkit.getPluginManager().registerEvents(new LegendChatListener(displayProvider), this);
             sLogger.info("LegendChat hook initialized, tag 'top_donator'");
@@ -121,14 +124,27 @@ public class StrixLSTop extends JavaPlugin {
             sLogger.warn("LegendChat not loaded, disabling integration");
         }
 
+        if (hasPluginLoaded("HolographicDisplays")) {
+            hologramProvider = new HDHologramProvider();
+            HologramLoadController.getInstance().handle();
+            sLogger.info("HolographicDisplays hook initialized, displays holograms enabled");
+        } else {
+            sLogger.warn("LegendChat not loaded, disabling holograms module");
+        }
+    }
+
+    private void loadBukkit() {
         getCommand("topdonators").setExecutor(new TopDonatorsCommand());
+        getCommand("strixlstop").setExecutor(new LsTopCommand());
     }
 
     private void loadTasks() {
         timer = new Timer();
 
-        var lsTaskDelay = (long) configFile.getConfig().getInt("Tasks.lojasquare-update") * 60 * 1000;
+        var lsTaskDelay = configFile.getConfig().getInt("Tasks.lojasquare-update") * 60 * 1000;
+        var holoTaskDelay = configFile.getConfig().getInt("Tasks.holograms-update") * 60 * 20;
         timer.schedule(new LojasquareUpdateTask(), lsTaskDelay, lsTaskDelay);
+        bukkitTask = new HologramsUpdateTask().runTaskTimer(this, holoTaskDelay, holoTaskDelay);
     }
 
     public boolean hasPluginLoaded(String name) {
@@ -141,7 +157,9 @@ public class StrixLSTop extends JavaPlugin {
      */
 
     private boolean loadData() {
-        return LojasquareLoadController.getInstance().handle();
+        var valid = LojasquareLoadController.getInstance().handle();
+        if (!valid) Bukkit.getPluginManager().disablePlugin(this);
+        return valid;
     }
 
     public static StrixLSTop getInstance() {

@@ -28,7 +28,9 @@ public class YamlDisplayProvider implements IDisplayProvider {
         var holoValid = cs.getString("hologram.content.valid").replace("&", "§");
         var holoInvalid = cs.getString("hologram.content.invalid").replace("&", "§");
 
-        hologramData = new HologramData(holoHeader, holoFooter, holoValid, holoInvalid);
+        var holoSize = cs.getInt("hologram.size");
+
+        hologramData = new HologramData(holoHeader, holoFooter, holoValid, holoInvalid, holoSize);
     }
 
     @Override

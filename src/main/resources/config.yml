@@ -31,6 +31,8 @@ Display:
   lc-tag: '&8[&5&lTOP-DONATOR&8]&f'
   # Configurações do holograma
   hologram:
+    # Tamanho de valores que serão exibidos
+    size: 5
     # Parte de cima
     header:
       - '&5&lTop Doadores deste mês'
@@ -44,3 +46,32 @@ Display:
       - ''
       - '&fAgradecemos a confiança em nosso servidor'
       - '&fE ainda mais por &d&ljogar conosco&f!'
+
+# Configurações das mensagens
+Messages:
+  # Mensagens do /topdonators
+  donator:
+    # Parte de cima da mensagem
+    header:
+      - ' '
+      - '&8&m-------------------------'
+      - '&8[&5&lStrixLSTop&8] &5Top doadores'
+      - ' '
+    # Meio da mensagem
+    value: '&5@player &f- &d@value'
+    # Parte de baixo da mensagem
+    footer:
+      - ' '
+      - '&8&m-------------------------'
+  # Mensagem ao criar um holograma
+  hologram-create: '&8[&5&lStrixLSTop&8] &fHolograma &acriado &fcom sucesso!'
+  # Mensagem ao deletar todos os hologramas
+  hologram-delete: '&8[&5&lStrixLSTop&8] &fHologramas &cdeletados &fcom sucesso!'
+  # Mensagem de erro sem permissão
+  error-no-perm: '&8[&5&lStrixLSTop&8] &cSem permissao!'
+  # Mensagem de erro de utilizar comandos no console
+  error-not-player: '&8[&5&lStrixLSTop&8] &cSomente jogadores podem utilizar esse comando'
+  # Mensagem de erro de utilizar hologramas sem a dependencia
+  error-not-hologram: '&8[&5&lStrixLSTop&8] &cHolographicDisplays não hookado'
+  # Mensagem de ajuda
+  help: '&8[&5&lStrixLSTop&8] &fUtillize /lstop <createhologram|deletehologram>'
