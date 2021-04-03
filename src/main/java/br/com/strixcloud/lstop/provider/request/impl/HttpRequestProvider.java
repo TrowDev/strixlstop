@@ -63,8 +63,7 @@ public class HttpRequestProvider implements IRequestProvider {
          */
 
         var ms = msCalc.calculate();
-        return new HttpResponse(statusCode,
-                (JsonObject) parser.parse(!sb.toString().equals("") ? sb.toString() : "{}"), ms
+        return new HttpResponse(statusCode, parser.parse(!sb.toString().equals("") ? sb.toString() : "{}"), ms
         );
     }
 

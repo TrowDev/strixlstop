@@ -1,6 +1,5 @@
 package br.com.strixcloud.lstop;
 
-import br.com.strixcloud.lstop.api.StrixLSTopAPI;
 import br.com.strixcloud.lstop.bukkit.command.TopDonatorsCommand;
 import br.com.strixcloud.lstop.bukkit.command.lstop.LsTopCommand;
 import br.com.strixcloud.lstop.bukkit.listener.LegendChatListener;

@@ -3,6 +3,7 @@ package br.com.strixcloud.lstop.provider.lojasquare.impl;
 import br.com.strixcloud.lstop.entities.data.TopAccount;
 import br.com.strixcloud.lstop.provider.lojasquare.ILSProvider;
 import br.com.strixcloud.lstop.provider.request.IRequestProvider;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import lombok.RequiredArgsConstructor;
 import lombok.var;
@@ -31,9 +32,9 @@ public class HttpLSProvider implements ILSProvider {
         // Gambiarra anti erro kkkk, de certa forma funciona bem.
         // Gambiarra a gente aceita, oque não aceitamos é a derrota.
 
-        if (res.getOBJECT().toString().equalsIgnoreCase("[]")) return topAccounts;
+        if (res.getOBJECT() instanceof JsonArray) return topAccounts;
 
-        for (Map.Entry<String, JsonElement> entry : res.getOBJECT().entrySet()) {
+        for (Map.Entry<String, JsonElement> entry : res.getOBJECT().getAsJsonObject().entrySet()) {
             var p = entry.getKey();
             var value = entry.getValue().getAsDouble();
 
