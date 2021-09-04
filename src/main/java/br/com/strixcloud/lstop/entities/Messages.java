@@ -17,7 +17,7 @@ public enum Messages {
     ERROR_NO_PERMISSION("Messages.error-no-perm", "&8[&5&lStrixLSTop&8] &cSem permissao!"),
     ERROR_NOT_PLAYER("Messages.error-not-player", "&8[&5&lStrixLSTop&8] &cSomente jogadores podem utilizar esse comando"),
     ERROR_NOT_HOLOGRAM("Messages.error-not-hologram", "&8[&5&lStrixLSTop&8] &cHolographicDisplays não hookado"),
-    HELP_MESSAGE("Messages.help", "&8[&5&lStrixLSTop&8] &fUtillize /lstop <createhologram|deletehologram>");
+    HELP_MESSAGE("Messages.help", "&8[&5&lStrixLSTop&8] &fUtillize /lstop <create|delete>");
 
     private Object value;
 

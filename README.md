@@ -9,10 +9,10 @@
 #### Commands:
 - strixlstop:
     **Main Command** *(Alises: lstop;lojasquaretop)*
-    - deletehologram:
+    - delete:
         - Permission: *strixlstop.delete*
         - **Deletes all holograms**
-    - createhologram:
+    - create:
         - Permission: *strixlstop.create*
         - **Deletes all holograms**
 - topdonators:

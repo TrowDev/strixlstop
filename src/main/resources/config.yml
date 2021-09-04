@@ -74,4 +74,4 @@ Messages:
   # Mensagem de erro de utilizar hologramas sem a dependencia
   error-not-hologram: '&8[&5&lStrixLSTop&8] &cHolographicDisplays não hookado'
   # Mensagem de ajuda
-  help: '&8[&5&lStrixLSTop&8] &fUtillize /lstop <createhologram|deletehologram>'
+  help: '&8[&5&lStrixLSTop&8] &fUtillize /lstop <create|delete>'
